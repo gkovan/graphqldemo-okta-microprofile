@@ -37,6 +37,41 @@ Also, a simple Hello world endpoint is created, have a look at the class **Hello
 More information on MicroProfile can be found [here](https://microprofile.io/)
 
 
+### Okta GraphQL microprofile tutorial
+
+The tutorial is located:  https://developer.okta.com/blog/2021/01/11/microprofile-graphql
+
+To start the server:
+
+```
+mvn liberty:run
+```
+
+GraphQL query passing in a valid JWT Bearer token
+```
+http POST :9080/graphql query='{ surfReport(location:"Texas") {location,chanceOfRainPercent,windKnots,windDirection,swellHeight,swellPeriodSeconds} }' \
+"Authorization: Bearer $TOKEN"
+```
+
+Note: Tot get a JWT token:
+
+Step 1:  Get an authorization code:
+```
+https://oidcdebugger.com/ 
+```
+
+Step 2:  Get a JWT access token:
+```
+http -f https://dev-4163315.okta.com/oauth2/default/v1/token \
+grant_type=authorization_code \
+code=6O5C3XUSmtbVDAj0-v9mpCgF5ttaH2t1pMqT7s2HvTQ \
+client_id=0oa5dbwp1CFdaXOZI5d6 \
+client_secret=kNbciyJs9hOgC4t88mG0_V15EKPa7_dfrXiEk9wz \
+redirect_uri=https://oidcdebugger.com/debug
+```
+
+Note: replace value for code with the value you got in Step 1
+
 
 
 
